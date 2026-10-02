@@ -6,7 +6,6 @@ import Link from 'next/link';
 import type { NavChild } from '@/constants/navigation';
 import { cn } from '@/utils/cn';
 
-import { SwapLabel, useLabelSwap } from './LabelSwap';
 import { NAV_LINK_CLASSES } from './Nav.styles';
 
 type NavDropdownProps = {
@@ -20,20 +19,16 @@ type NavDropdownProps = {
 
 /** Item del nav con submenú — el "Soluciones ⌄" del diseño. */
 export function NavDropdown({ label, items, isOpen, onToggle, onSelect }: NavDropdownProps) {
-  const { ref, handlers } = useLabelSwap<HTMLButtonElement>();
-
   return (
     <div className="relative">
       <button
-        ref={ref}
         type="button"
         aria-expanded={isOpen}
         aria-haspopup="true"
         onClick={onToggle}
-        {...handlers}
         className={cn(NAV_LINK_CLASSES, 'inline-flex items-center gap-1')}
       >
-        <SwapLabel label={label} />
+        {label}
         <ChevronDown
           aria-hidden
           className={cn(
