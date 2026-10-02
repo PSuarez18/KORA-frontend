@@ -88,7 +88,11 @@ export function Nav({ locale, dict }: NavProps) {
         >
           <Logo locale={locale} />
 
-          <nav aria-label={dict.nav.mainNavigation} className="hidden items-center gap-6 lg:flex">
+          {/* 16px entre links hasta xl: con 24 la fila no entra a 1024px una vez que los links no se parten. */}
+          <nav
+            aria-label={dict.nav.mainNavigation}
+            className="hidden items-center gap-4 lg:flex xl:gap-6"
+          >
             {items.map((item) =>
               item.children ? (
                 <NavDropdown
