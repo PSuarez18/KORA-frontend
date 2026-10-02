@@ -24,6 +24,7 @@ import { shadows } from './shadows';
 import { containers, semanticSpacing } from './spacing';
 import { textures } from './textures';
 import {
+  editorialFontSizes,
   fluidFontSizes,
   fontFamilies,
   fontSizes,
@@ -45,6 +46,7 @@ export const tokens = {
     weights: fontWeights,
     sizes: fontSizes,
     fluid: fluidFontSizes,
+    editorial: editorialFontSizes,
     lineHeights,
     letterSpacings,
     styles: textStyles,

@@ -1,3 +1,7 @@
+import type { PostsCopy } from '@/features/blog';
+
+import { esPosts } from './posts/es';
+
 /**
  * Diccionario español — **fuente de verdad del tipo `Dictionary`**.
  *
@@ -141,27 +145,61 @@ export const es = {
   blog: {
     eyebrow: 'Blog',
     title: 'Ideas para modernizar tu empresa',
-    cta: 'Ver todos los artículos',
+    cta: 'Ver artículos',
     readMore: 'Leer artículo',
-    posts: {
-      'implementar-claude-en-tu-equipo': {
-        category: 'AI en empresas',
-        title: 'Cómo implementar Claude en tu equipo sin que nadie lo rechace',
-        excerpt:
-          'La adopción de IA no es un problema técnico, es un problema de cambio organizacional. Te contamos qué funciona y qué no en PyMEs...',
-      },
-      'cuellos-de-botella-en-pymes': {
-        category: 'Procesos',
-        title: 'Los 3 cuellos de botella más comunes en PyMEs que frenan el crecimiento',
-        excerpt:
-          'Después de trabajar con decenas de empresas, encontramos patrones que se repiten. Identificarlos es el primer paso para...',
-      },
-      'de-papel-a-la-nube': {
-        category: 'Digitalización',
-        title: 'De papel a la nube: una guía práctica para digitalizar tu operación',
-        excerpt:
-          'Migrar procesos analógicos a digital no tiene que ser traumático. Esto es lo que aprendimos acompañando empresas...',
-      },
+  },
+
+  blogPage: {
+    meta: {
+      title: 'Blog',
+      description:
+        'Notas de operación de Kora: cómo estandarizar, qué digitalizar primero y cuándo tiene sentido automatizar en una PyME.',
+    },
+    hero: {
+      eyebrow: 'Blog · Notas de operación',
+      title: 'Procesos que se sostienen solos.',
+      subtitle:
+        'Lo que aprendemos ordenando la operación de PyMEs: cómo estandarizar, qué digitalizar primero y cuándo tiene sentido automatizar.',
+    },
+    featured: {
+      label: 'Destacado',
+      cta: 'Leer artículo',
+    },
+    archive: {
+      title: 'Archivo',
+      categoriesTitle: 'Categorías',
+      all: 'Todas',
+      countOne: '{count} artículo',
+      countOther: '{count} artículos',
+    },
+    newsletter: {
+      eyebrow: 'Newsletter',
+      title: 'Una nota por semana. Sin ruido.',
+      description:
+        'Procesos, herramientas y el Radar IA con lo que de verdad cambia algo para una PyME.',
+      submit: 'Suscribirme',
+      note: 'Te podés dar de baja cuando quieras.',
+    },
+    categories: {
+      estandarizacion: 'Estandarización',
+      digitalizacion: 'Digitalización',
+      automatizacion: 'Automatización',
+      'gestion-del-conocimiento': 'Gestión del conocimiento',
+      'radar-ia': 'Radar IA',
+    },
+    article: {
+      back: 'Blog',
+      author: 'Equipo kora.',
+      readTime: '{minutes} min de lectura',
+      readTimeShort: '{minutes} min',
+      summaryTitle: 'En resumen',
+      stepsTitle: 'Qué hacer con esto',
+      relevanceTitle: '¿Te importa?',
+    },
+    relevance: {
+      now: 'Sí, ahora',
+      watch: 'Seguilo',
+      later: 'Todavía no',
     },
   },
 
@@ -228,7 +266,8 @@ export const es = {
       steps: {
         diagnostico: {
           title: 'Diagnóstico',
-          description: 'Relevamos tu operación, identificamos cuellos de botella y puntos de pérdida.',
+          description:
+            'Relevamos tu operación, identificamos cuellos de botella y puntos de pérdida.',
           result: 'un mapa de la operación con prioridades definidas.',
         },
         implementacion: {
@@ -325,6 +364,8 @@ export const es = {
       messageLong: 'Máximo 2000 caracteres.',
     },
   },
+
+  posts: esPosts,
 } as const;
 
 /**
@@ -338,5 +379,10 @@ type Widen<T> = T extends string
     ? readonly Widen<U>[]
     : { readonly [K in keyof T]: Widen<T[K]> };
 
-/** Forma que deben cumplir todos los diccionarios. */
-export type Dictionary = Widen<typeof es>;
+/**
+ * Forma que deben cumplir todos los diccionarios.
+ *
+ * `posts` queda afuera de `Widen`: su `template`, `kind` y `relevance` son
+ * discriminantes que el render necesita como literales, no como `string`.
+ */
+export type Dictionary = Widen<Omit<typeof es, 'posts'>> & { readonly posts: PostsCopy };

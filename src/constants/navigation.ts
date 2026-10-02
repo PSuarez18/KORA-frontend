@@ -39,7 +39,7 @@ export function buildNavItems(locale: Locale, dict: Dictionary): readonly NavIte
     },
     { id: 'method', label: dict.nav.method, href: homeAnchor(locale, 'metodo') },
     { id: 'about', label: dict.nav.about, href: ROUTES_APP.nosotras(locale) },
-    { id: 'blog', label: dict.nav.blog, href: homeAnchor(locale, 'blog') },
+    { id: 'blog', label: dict.nav.blog, href: ROUTES_APP.blog(locale) },
     { id: 'contact', label: dict.nav.contact, href: homeAnchor(locale, 'contacto') },
   ];
 }

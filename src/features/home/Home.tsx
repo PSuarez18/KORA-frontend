@@ -23,7 +23,13 @@ export function Home({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       <Solutions locale={locale} dict={dict.solutions} />
       <NextStep dict={dict.nextStep} />
       <Method dict={dict.method} />
-      <BlogSection locale={locale} dict={dict.blog} newsletterDict={dict.newsletter} />
+      <BlogSection
+        locale={locale}
+        dict={dict.blog}
+        newsletterDict={dict.newsletter}
+        postsDict={dict.posts}
+        categoriesDict={dict.blogPage.categories}
+      />
       <Faqs dict={dict.faqs} />
       <ContactSection dict={dict.contact} />
     </>

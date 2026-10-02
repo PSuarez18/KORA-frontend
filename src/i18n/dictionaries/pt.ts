@@ -1,4 +1,5 @@
 import type { Dictionary } from './es';
+import { ptPosts } from './posts/pt';
 
 /** Diccionario portugués (pt-BR). Tipado contra `es`: si falta una clave, no compila. */
 export const pt: Dictionary = {
@@ -138,25 +139,59 @@ export const pt: Dictionary = {
     title: 'Ideias para modernizar sua empresa',
     cta: 'Ver todos os artigos',
     readMore: 'Ler artigo',
-    posts: {
-      'implementar-claude-en-tu-equipo': {
-        category: 'IA nas empresas',
-        title: 'Como implementar o Claude no seu time sem que ninguém rejeite',
-        excerpt:
-          'A adoção de IA não é um problema técnico, é um problema de mudança organizacional. Contamos o que funciona e o que não funciona em PMEs...',
-      },
-      'cuellos-de-botella-en-pymes': {
-        category: 'Processos',
-        title: 'Os 3 gargalos mais comuns que freiam o crescimento das PMEs',
-        excerpt:
-          'Depois de trabalhar com dezenas de empresas, encontramos padrões que se repetem. Identificá-los é o primeiro passo para...',
-      },
-      'de-papel-a-la-nube': {
-        category: 'Digitalização',
-        title: 'Do papel à nuvem: um guia prático para digitalizar sua operação',
-        excerpt:
-          'Migrar processos analógicos para o digital não precisa ser traumático. Foi isso que aprendemos acompanhando empresas...',
-      },
+  },
+
+  blogPage: {
+    meta: {
+      title: 'Blog',
+      description:
+        'Notas de operação da Kora: como padronizar, o que digitalizar primeiro e quando faz sentido automatizar em uma PME.',
+    },
+    hero: {
+      eyebrow: 'Blog · Notas de operação',
+      title: 'Processos que se sustentam sozinhos.',
+      subtitle:
+        'O que aprendemos organizando a operação de PMEs: como padronizar, o que digitalizar primeiro e quando faz sentido automatizar.',
+    },
+    featured: {
+      label: 'Destaque',
+      cta: 'Ler artigo',
+    },
+    archive: {
+      title: 'Arquivo',
+      categoriesTitle: 'Categorias',
+      all: 'Todas',
+      countOne: '{count} artigo',
+      countOther: '{count} artigos',
+    },
+    newsletter: {
+      eyebrow: 'Newsletter',
+      title: 'Uma nota por semana. Sem ruído.',
+      description:
+        'Processos, ferramentas e o Radar IA com o que realmente muda algo para uma PME.',
+      submit: 'Inscrever-me',
+      note: 'Você pode cancelar quando quiser.',
+    },
+    categories: {
+      estandarizacion: 'Padronização',
+      digitalizacion: 'Digitalização',
+      automatizacion: 'Automação',
+      'gestion-del-conocimiento': 'Gestão do conhecimento',
+      'radar-ia': 'Radar IA',
+    },
+    article: {
+      back: 'Blog',
+      author: 'Equipe kora.',
+      readTime: '{minutes} min de leitura',
+      readTimeShort: '{minutes} min',
+      summaryTitle: 'Em resumo',
+      stepsTitle: 'O que fazer com isso',
+      relevanceTitle: 'Importa para você?',
+    },
+    relevance: {
+      now: 'Sim, agora',
+      watch: 'Acompanhe',
+      later: 'Ainda não',
     },
   },
 
@@ -317,4 +352,6 @@ export const pt: Dictionary = {
       messageLong: 'Máximo de 2000 caracteres.',
     },
   },
+
+  posts: ptPosts,
 };

@@ -22,7 +22,10 @@ export const colorPrimitives = {
     700: '#a3551a',
     600: '#c46a1f',
     500: '#e08a3c',
-    /** Ámbar medio de las elipses de fondo. Solo se usa difuminado. */
+    /**
+     * Ámbar medio. En la home y Nosotras solo aparece difuminado (elipses de
+     * fondo); en el blog es la marca sólida: rayitas, medidor y numerales.
+     */
     450: '#e79a4e',
     400: '#ffb882',
     /** Ámbar brillante de los numerales "01." de las cards de proceso. */
@@ -71,6 +74,14 @@ export const colorPrimitives = {
   },
   /** Crema casi blanco del círculo de icono par. */
   iconCream: '#fff9f6',
+  /**
+   * Papeles del blog (diseño "Blog kora."): el crema del texto sobre oscuro y
+   * la arena de los recuadros "En resumen".
+   */
+  paper: {
+    cream: '#fcf7f1',
+    sand: '#f0e1d0',
+  },
   /**
    * El borde de las cards en Figma es `#c46a1f` a 0.401px. A 1px de navegador
    * ese naranja se ve mucho más fuerte de lo que muestra el diseño, así que se
@@ -128,6 +139,13 @@ export const semanticColors = {
     tile: colorPrimitives.peach.tile,
     /** Tile frío — la card "Implementación" alterna a acero. */
     tileCool: colorPrimitives.steel.wash,
+    /** Etiqueta de categoría del blog: rectángulo celeste. */
+    chip: colorPrimitives.sky[300],
+    /**
+     * Arena del blog: recuadro "En resumen", fondo de la imagen destacada y,
+     * al 35%, el hover de las filas del archivo.
+     */
+    surfaceSand: colorPrimitives.paper.sand,
   },
   text: {
     heading: colorPrimitives.ink[900],
@@ -138,6 +156,8 @@ export const semanticColors = {
     onInverseMuted: colorPrimitives.neutral[300],
     /** Palabra resaltada dentro de titulares sobre fondo oscuro ("juntos"). */
     onInverseAccent: colorPrimitives.sky[300],
+    /** Crema del texto sobre oscuro en el blog (newsletter, botón del artículo). */
+    onInverseWarm: colorPrimitives.paper.cream,
     placeholder: colorPrimitives.ink[500],
     /** Ícono de las cards de valor impares: azul acero sobre el círculo azulado. */
     iconCool: colorPrimitives.steel.ink,
@@ -154,6 +174,8 @@ export const semanticColors = {
     primary: colorPrimitives.amber[600],
     soft: colorPrimitives.amber[400],
     wash: colorPrimitives.amber[200],
+    /** Marca ámbar del blog: rayitas, medidor del Radar, numerales y botón del newsletter. */
+    mark: colorPrimitives.amber[450],
   },
   border: {
     /** Borde apenas visible sobre canvas — píldora de idioma del nav. */
@@ -178,6 +200,8 @@ export const semanticColors = {
     /** Línea divisoria de inputs y acordeones. */
     hairline: 'rgba(8, 20, 34, 0.18)',
     hairlineInverse: 'rgba(255, 255, 255, 0.35)',
+    /** Divisoria más tenue del blog: filas del archivo, firma del artículo. */
+    hairlineSoft: 'rgba(8, 20, 34, 0.12)',
   },
   /**
    * Colores de la **atmósfera**: las formas difuminadas que bañan el fondo de

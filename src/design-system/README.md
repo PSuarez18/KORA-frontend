@@ -27,8 +27,11 @@ Se editan **dos archivos**: `tokens/colors.ts` y `theme.css`. Nada más.
 
 | Familia | Uso | Origen |
 |---|---|---|
-| **Satoshi** | Titulares y cuerpo | Fontshare (CDN, `<link>` en `src/app/layout.tsx`) |
+| **Satoshi** | Titulares y cuerpo | Fontshare (CDN, `<link>` en `src/app/[locale]/layout.tsx`) |
 | **IBM Plex Mono** | Eyebrows y etiquetas de sección | `next/font/google` — auto-hospedada, expone `--font-plex-mono` |
+| **DM Sans** | Texto corrido del blog (`font-reading`) | `next/font/google` en `src/app/[locale]/blog/layout.tsx` — solo la descargan las páginas del blog, expone `--font-dm-sans` |
+
+El blog usa además su propia escala, `editorialFontSizes` (clases `text-ed-*`): cada tamaño trae interlineado y tracking del diseño "Blog kora.". Si se agrega uno, hay que registrarlo también en el `classGroups` de `src/utils/cn.ts`.
 
 > **Ojo:** IBM Plex Mono **no** está en Fontshare. Pedirla ahí devuelve `200` pero sin `@font-face`, así que la fuente cae en silencio a la monoespaciada del sistema. Por eso va por `next/font/google`.
 

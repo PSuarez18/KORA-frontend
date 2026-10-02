@@ -53,6 +53,13 @@
   --kora-text-accent-vivid: #f07818;
   --kora-text-steel: #305b7e;
 
+  /* — Blog (diseño "Blog kora.") — */
+  --kora-chip: #afcbe3;
+  --kora-surface-sand: #f0e1d0;
+  --kora-text-on-inverse-warm: #fcf7f1;
+  --kora-accent-mark: #e79a4e;
+  --kora-border-hairline-soft: rgba(8, 20, 34, 0.12);
+
   /* — Iconos de card (alternan) — */
   --kora-icon-wash: rgba(48, 91, 126, 0.2);
   --kora-icon-wash-warm: #fff9f6;

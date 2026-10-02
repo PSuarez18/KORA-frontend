@@ -1,4 +1,5 @@
 import type { Dictionary } from './es';
+import { enPosts } from './posts/en';
 
 /** Diccionario inglés. Tipado contra `es`: si falta una clave, no compila. */
 export const en: Dictionary = {
@@ -138,25 +139,59 @@ export const en: Dictionary = {
     title: 'Ideas to modernise your company',
     cta: 'See all articles',
     readMore: 'Read article',
-    posts: {
-      'implementar-claude-en-tu-equipo': {
-        category: 'AI in business',
-        title: 'How to roll out Claude in your team without anyone pushing back',
-        excerpt:
-          'AI adoption is not a technical problem, it is an organisational change problem. Here is what works and what does not in SMEs...',
-      },
-      'cuellos-de-botella-en-pymes': {
-        category: 'Processes',
-        title: 'The 3 most common bottlenecks holding SMEs back',
-        excerpt:
-          'After working with dozens of companies, we found patterns that repeat. Spotting them is the first step towards...',
-      },
-      'de-papel-a-la-nube': {
-        category: 'Digitalisation',
-        title: 'From paper to the cloud: a practical guide to digitalising your operation',
-        excerpt:
-          'Migrating analogue processes to digital does not have to hurt. This is what we learned working alongside companies...',
-      },
+  },
+
+  blogPage: {
+    meta: {
+      title: 'Blog',
+      description:
+        'Operations notes from Kora: how to standardise, what to digitalise first and when automating makes sense for an SME.',
+    },
+    hero: {
+      eyebrow: 'Blog · Operations notes',
+      title: 'Processes that hold up on their own.',
+      subtitle:
+        'What we learn putting SME operations in order: how to standardise, what to digitalise first and when automating makes sense.',
+    },
+    featured: {
+      label: 'Featured',
+      cta: 'Read article',
+    },
+    archive: {
+      title: 'Archive',
+      categoriesTitle: 'Categories',
+      all: 'All',
+      countOne: '{count} article',
+      countOther: '{count} articles',
+    },
+    newsletter: {
+      eyebrow: 'Newsletter',
+      title: 'One note a week. No noise.',
+      description:
+        'Processes, tools and the AI Radar, with what actually changes something for an SME.',
+      submit: 'Subscribe',
+      note: 'You can unsubscribe at any time.',
+    },
+    categories: {
+      estandarizacion: 'Standardisation',
+      digitalizacion: 'Digitalisation',
+      automatizacion: 'Automation',
+      'gestion-del-conocimiento': 'Knowledge management',
+      'radar-ia': 'AI Radar',
+    },
+    article: {
+      back: 'Blog',
+      author: 'The kora. team',
+      readTime: '{minutes} min read',
+      readTimeShort: '{minutes} min',
+      summaryTitle: 'In short',
+      stepsTitle: 'What to do with this',
+      relevanceTitle: 'Does it matter to you?',
+    },
+    relevance: {
+      now: 'Yes, now',
+      watch: 'Keep an eye on it',
+      later: 'Not yet',
     },
   },
 
@@ -316,4 +351,6 @@ export const en: Dictionary = {
       messageLong: 'Maximum 2000 characters.',
     },
   },
+
+  posts: enPosts,
 };

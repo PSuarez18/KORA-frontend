@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Tag } from '@/components/atoms/Tag';
 import { useTilt } from '@/hooks/animations';
 import { HTML_LANG, type Locale } from '@/i18n/config';
 
@@ -53,11 +54,14 @@ export function BlogCard({
       className="flex h-full flex-col rounded-card-soft border border-peach bg-surface px-8 pb-10 pt-8 shadow-card-rest transition-shadow duration-300 ease-out hover:shadow-card-hover"
     >
       {/*
-        La portada va entera, a su tamaño (335×150), sin parallax. Antes se
-        mostraba a 200px de alto dentro de un marco de 150 para poder
+        La portada va a la proporción del diseño (335×150), sin parallax. Antes
+        se mostraba a 200px de alto dentro de un marco de 150 para poder
         desplazarla al scrollear: eso la ampliaba un 33%, le recortaba arriba y
-        abajo y, al ser un asset de 335px, la dejaba borrosa. El encuadre del
-        diseño es la imagen completa.
+        abajo y, al ser un asset de 335px, la dejaba borrosa.
+
+        La proporción va fija (`aspect` + `object-cover`) y no la de cada imagen:
+        las portadas no vienen todas al mismo tamaño, y con su proporción propia
+        las cards de una misma fila quedaban con fotos de distinto alto.
       */}
       <div className="w-full overflow-hidden rounded-md">
         <Image
@@ -65,14 +69,12 @@ export function BlogCard({
           alt=""
           width={COVER_WIDTH}
           height={COVER_HEIGHT}
-          className="h-auto w-full"
+          className="aspect-[335/150] h-auto w-full object-cover"
         />
       </div>
 
       {/* Medidas del nodo `texto card`: pill 129×27 a 27px de la imagen, título a 22, cuerpo a 32. */}
-      <span className="mt-7 w-fit rounded-pill border border-ink/60 px-[15px] py-1 font-display text-sm font-bold leading-relaxed text-heading">
-        {category}
-      </span>
+      <Tag className="mt-7">{category}</Tag>
 
       <h3 className="mt-[1.375rem] max-w-[19.3125rem] font-display text-lg font-black leading-relaxed tracking-tight text-heading">
         <Link href={href} className="transition-colors duration-200 ease-out hover:text-accent">

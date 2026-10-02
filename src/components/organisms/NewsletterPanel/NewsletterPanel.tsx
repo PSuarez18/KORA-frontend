@@ -1,33 +1,14 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
-import { toast } from 'sonner';
 
 import { Button } from '@/components/atoms/Button';
-import { ROUTES_API } from '@/constants/routes.api';
+import { useNewsletterSignup } from '@/hooks/useNewsletterSignup';
 import type { Dictionary } from '@/i18n';
-import { apiClient } from '@/lib/axios';
 
 /** Panel oscuro de suscripción al newsletter. */
 export function NewsletterPanel({ dict }: { dict: Dictionary['newsletter'] }) {
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      await apiClient.post(ROUTES_API.newsletter, { email });
-      toast.success(dict.success);
-      setEmail('');
-    } catch {
-      toast.error(dict.error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { email, setEmail, isSubmitting, handleSubmit } = useNewsletterSignup(dict);
 
   return (
     <div className="rounded-panel bg-surface-inverse px-8 py-10 shadow-panel sm:px-11">

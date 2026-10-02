@@ -93,15 +93,17 @@ src/
 │   ├── api/              # BFF (contact, newsletter) — fuera del prefijo de idioma
 │   └── globals.css
 ├── components/           # UI reutilizable (Atomic Design)
-│   ├── atoms/            # Button, Container, Section, Eyebrow, Overline, SquareMark, Logo, UnderlineField, RevealText
+│   ├── atoms/            # Button, Container, Section, Eyebrow, Overline, SquareMark, Logo, UnderlineField, RevealText, Tag
 │   ├── molecules/        # SectionHeading, FaqItem, BulletItem
 │   └── organisms/        # Nav/, ValueCard, BlogCard, BusinessUnitBlock, FaqAccordion, NewsletterPanel
 ├── constants/            # routes.app, routes.api, routes.backend, navigation, site
 ├── design-system/        # tokens + preset de Tailwind + theme.css
 ├── features/             # lógica por dominio
 │   ├── home/             # la landing: secciones + data estructural
+│   ├── blog/             # portada del blog, artículo (editorial / radar), fixture de posts
 │   └── contact/          # formulario, schema zod, service
-├── hooks/animations/     # sistema GSAP: reveal, texto, parallax, secuencia
+├── hooks/                # useNewsletterSignup (lo comparten los tres formularios de newsletter)
+│   └── animations/       # sistema GSAP: reveal, texto, parallax, secuencia
 ├── i18n/                 # config de idiomas + diccionarios
 ├── lib/                  # cliente Axios
 ├── middleware.ts         # redirige al idioma correspondiente
@@ -114,7 +116,7 @@ El organism `Nav/` está partido en piezas: `Nav.tsx` (orquesta), `NavDropdown`,
 
 ### 4.3 Presentacionales vs. lógica
 
-Los componentes de `src/components/` son presentacionales: reciben props y renderizan. La lógica (estado, llamadas al BFF) vive en los features o en hooks (`useNav`, `useScrollReveal`).
+Los componentes de `src/components/` son presentacionales: reciben props y renderizan. La lógica (estado, llamadas al BFF) vive en los features o en hooks (`useNav`, `useScrollReveal`, `useNewsletterSignup`).
 
 ### 4.4 Animaciones — GSAP
 
@@ -174,7 +176,9 @@ Detalle en `src/design-system/README.md`.
 
 ### Tipografía
 
-**Satoshi** (display/cuerpo) e **IBM Plex Mono** (eyebrows) se sirven desde Fontshare vía `<link>` en `app/layout.tsx`. **Pendiente:** auto-hospedarlas y pasar a `next/font/local`.
+**Satoshi** (display/cuerpo, pesos 300–900) se sirve desde Fontshare vía `<link>` en `app/[locale]/layout.tsx`. **IBM Plex Mono** (eyebrows de la home) va por `next/font/google` en el mismo layout. **DM Sans** es la letra de lectura del blog (`font-reading`): va por `next/font/google` en `app/[locale]/blog/layout.tsx`, así que el resto del sitio no la descarga. **Pendiente:** auto-hospedar Satoshi y pasar a `next/font/local`.
+
+El blog tiene su propia escala tipográfica (`editorialFontSizes`, clases `text-ed-*`): cada tamaño trae su interlineado y su tracking, sacados del diseño "Blog kora.". La base (DM Sans 17px, interlineado 1.6) está en `features/blog/blog.styles.ts`; en Satoshi va solo lo que declara `font-display`, siempre en peso 500 — el diseño del blog es liviano, no usa bold.
 
 ---
 
@@ -187,13 +191,14 @@ Detalle en `src/design-system/README.md`.
 | Soluciones (3 unidades de negocio) | ✅ |
 | Tu próximo paso (CTA) | ✅ |
 | Método (banner) | ✅ imagen exportada |
-| Blog (3 cards) + Newsletter | ✅ con fixture |
+| Blog en la home (3 cards) + Newsletter | ✅ con fixture compartido con `/blog`; con menos de 3 notas se repiten desde la más reciente (provisorio) |
+| `/[locale]/blog` (portada + archivo filtrable) y `/[locale]/blog/[slug]` | ✅ tipografía, etiquetas, newsletters y esquinas del diseño "Blog kora."; nav y fondo (Atmosphere) del sitio |
 | FAQs | ✅ |
 | Contacto (form + datos) | ✅ |
 | Nav (desktop + mobile) + selector de idioma | ✅ |
 | i18n es / en / pt | ✅ prerenderizado por idioma |
 | BFF `/api/contact`, `/api/newsletter` | ✅ degradan a 202 sin backend |
-| Páginas `/[locale]/blog`, `/[locale]/soluciones/*` | ⛔ **no existen** — el nav enlaza a rutas sin página |
+| Páginas `/[locale]/soluciones/*` | ⛔ **no existen** — el nav enlaza a rutas sin página |
 
 ### Deuda conocida
 
@@ -201,7 +206,8 @@ Detalle en `src/design-system/README.md`.
 - **Respuestas de las FAQs**: redacción propia, el diseño solo trae las preguntas. Confirmar con Kora.
 - **Iconos de las cards de valor**: se usan equivalentes de `lucide-react`; los originales son de un design kit de Figma.
 - **Banner del método**: es una imagen, y por lo tanto **no se traduce**. Si se necesita responsive real, texto seleccionable o multilenguaje, hay que reconstruirlo en HTML.
-- **Blog**: los artículos son un fixture. Reemplazar por una llamada al BFF (`ROUTES_API.posts`) cuando exista `kora_api`.
+- **Blog**: los artículos son un fixture (`features/blog/data/posts.ts` + `i18n/dictionaries/posts/`). Reemplazar por una llamada al BFF (`ROUTES_API.posts`) cuando exista `kora_api`. Hay 2 notas, las únicas con texto completo en el diseño; las otras 5 del diseño se suman cuando Kora mande el contenido. Las traducciones en/pt de las notas también son de Claude.
+- **Copy de los posts fuera de `Widen`**: `Dictionary` excluye `posts` del ensanchado porque `template`, `kind` y `relevance` son discriminantes literales. Un post nuevo se tipa con `PostsCopy` (`features/blog/types.ts`).
 - **Nav sobre el hero**: en Figma va dentro de la tarjeta de imagen; acá es `fixed` transparente que pasa a sólido al scrollear.
 
 ### Trampas ya pisadas (no repetir)

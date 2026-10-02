@@ -78,7 +78,7 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,500,700,900&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap"
         />
       </head>
       <body>

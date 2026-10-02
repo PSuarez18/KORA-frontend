@@ -6,6 +6,7 @@ import { radii, semanticRadii } from './tokens/radii';
 import { shadows } from './tokens/shadows';
 import { containers, semanticSpacing } from './tokens/spacing';
 import {
+  editorialFontSizes,
   fluidFontSizes,
   fontFamilies,
   fontSizes,
@@ -40,14 +41,18 @@ export const koraPreset = {
         'surface-warm': semanticColors.bg.surfaceWarm,
         tile: semanticColors.bg.tile,
         'tile-cool': semanticColors.bg.tileCool,
+        chip: semanticColors.bg.chip,
+        'surface-sand': semanticColors.bg.surfaceSand,
 
         heading: semanticColors.text.heading,
         body: semanticColors.text.body,
         accent: semanticColors.accent.primary,
         'accent-soft': semanticColors.accent.soft,
+        'accent-mark': semanticColors.accent.mark,
         'on-inverse': semanticColors.text.onInverse,
         'on-inverse-muted': semanticColors.text.onInverseMuted,
         'on-inverse-accent': semanticColors.text.onInverseAccent,
+        'on-inverse-warm': semanticColors.text.onInverseWarm,
         placeholder: semanticColors.text.placeholder,
         'icon-cool': semanticColors.text.iconCool,
         'icon-warm': semanticColors.text.iconWarm,
@@ -56,6 +61,7 @@ export const koraPreset = {
         /* También como color de fondo: rieles y divisorias de 1–2px (`bg-hairline`). */
         hairline: semanticColors.border.hairline,
         'hairline-inverse': semanticColors.border.hairlineInverse,
+        'hairline-soft': semanticColors.border.hairlineSoft,
         steel: semanticColors.text.steel,
       },
       borderColor: {
@@ -81,6 +87,7 @@ export const koraPreset = {
         display: [...fontFamilies.display],
         sans: [...fontFamilies.body],
         mono: [...fontFamilies.mono],
+        reading: [...fontFamilies.reading],
       },
       fontSize: {
         ...fontSizes,
@@ -92,6 +99,7 @@ export const koraPreset = {
         'fluid-eyebrow': fluidFontSizes.eyebrow,
         'fluid-page-title': fluidFontSizes.pageTitle,
         'fluid-section-lg': fluidFontSizes.sectionTitleLg,
+        ...editorialFontSizes,
       },
       lineHeight: lineHeights,
       letterSpacing: letterSpacings,
@@ -106,6 +114,7 @@ export const koraPreset = {
         avatar: semanticRadii.avatar,
         'card-soft': semanticRadii.cardSoft,
         tile: semanticRadii.tile,
+        sharp: semanticRadii.sharp,
       },
       boxShadow: {
         'card-rest': shadows.cardRest,
@@ -126,6 +135,7 @@ export const koraPreset = {
         'card-gutter': semanticSpacing.cardGutter,
         'nav-rest': semanticSpacing.navRestOffset,
         'page-hero': semanticSpacing.pageHeroTop,
+        'article-top': semanticSpacing.articleTop,
         'page-tail': semanticSpacing.pageTail,
         'contact-top': semanticSpacing.contactTop,
         'contact-bottom': semanticSpacing.contactBottom,
@@ -133,6 +143,7 @@ export const koraPreset = {
       maxWidth: {
         container: containers.default,
         narrow: containers.narrow,
+        article: containers.article,
         nav: containers.nav,
         wide: containers.wide,
       },

@@ -2,11 +2,12 @@ import type { ElementType, ReactNode } from 'react';
 
 import { cn } from '@/utils/cn';
 
-type ContainerWidth = 'default' | 'narrow' | 'nav' | 'wide';
+type ContainerWidth = 'default' | 'narrow' | 'article' | 'nav' | 'wide';
 
 const WIDTHS: Record<ContainerWidth, string> = {
   default: 'max-w-container',
   narrow: 'max-w-narrow',
+  article: 'max-w-article',
   nav: 'max-w-nav',
   wide: 'max-w-wide',
 };

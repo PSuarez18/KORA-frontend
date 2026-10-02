@@ -1,18 +1,22 @@
 /**
  * Tipografía de Kora 2.0.
  *
- * Dos familias, tal como el diseño de Figma:
+ * Tres familias. Las dos primeras son las del diseño de Figma:
  * - **Satoshi** — titulares y cuerpo. Se sirve desde Fontshare (ver `app/layout.tsx`).
  * - **IBM Plex Mono** — eyebrows y etiquetas de sección. Se carga con
  *   `next/font/google`, que la auto-hospeda y expone `--font-plex-mono`.
  *   (Fontshare NO distribuye IBM Plex Mono: pedirla ahí devuelve 200 sin
  *   `@font-face`, y la tipografía cae silenciosamente a la del sistema.)
+ * - **DM Sans** — texto corrido del blog (diseño "Blog kora."). Se carga con
+ *   `next/font/google` solo en el layout del blog, que expone `--font-dm-sans`:
+ *   el resto del sitio no la descarga.
  */
 
 export const fontFamilies = {
   display: ['Satoshi', 'Satoshi Variable', 'system-ui', 'sans-serif'],
   body: ['Satoshi', 'Satoshi Variable', 'system-ui', 'sans-serif'],
   mono: ['var(--font-plex-mono)', 'IBM Plex Mono', 'ui-monospace', 'monospace'],
+  reading: ['var(--font-dm-sans)', 'DM Sans', 'system-ui', 'sans-serif'],
 } as const;
 
 export const fontWeights = {
@@ -79,6 +83,71 @@ export const fluidFontSizes = {
   sectionTitleLg: 'clamp(2rem, 1.35rem + 3vw, 3.25rem)',
 } as const;
 
+/**
+ * Escala del blog (diseño "Blog kora.").
+ *
+ * A diferencia de la escala de la home, cada tamaño trae su interlineado y su
+ * tracking: en el diseño van siempre juntos, y separarlos obligaría a repetir
+ * tres clases en cada texto. Los que no traen interlineado heredan el de lectura
+ * (`lineHeights.reading`), igual que en el diseño.
+ *
+ * Los titulares grandes son fluidos: el tope es el valor exacto del diseño a
+ * 1280px y más; el piso, lo que entra en un teléfono.
+ */
+/** Tamaño solo, o tamaño + métricas — la forma que acepta `fontSize` en Tailwind. */
+type FontSizeWithMetrics =
+  string | [fontSize: string, metrics: { lineHeight?: string; letterSpacing?: string }];
+
+export const editorialFontSizes = {
+  /** Etiqueta de categoría chica — archivo y Radar IA: 11px. */
+  'ed-chip': '0.6875rem',
+  /** Rótulos en mayúsculas (eyebrows, kickers) y área del Radar: 13px. */
+  'ed-label': '0.8125rem',
+  /** Novedades del Radar y bajada del newsletter: 17px. */
+  'ed-body': ['1.0625rem', { lineHeight: '1.68' }],
+  /** Bajada de la portada y de la nota destacada: 18px. */
+  'ed-intro': ['1.125rem', { lineHeight: '1.55' }],
+  /** Cuerpo de un artículo: 18px con interlineado de lectura larga. */
+  'ed-reading': ['1.125rem', { lineHeight: '1.72' }],
+  /** Título de cada paso de "Qué hacer con esto": 19px. */
+  'ed-step': '1.1875rem',
+  /** Bajada del artículo: 21px. */
+  'ed-lead': ['1.3125rem', { lineHeight: '1.5' }],
+  /** Numerales "01" de los pasos: 22px. */
+  'ed-number': '1.375rem',
+  /** "Recibí la parte 3 cuando salga.": 24px. */
+  'ed-subscribe': ['1.5rem', { letterSpacing: '-0.015em' }],
+  /** Titular de cada fila del archivo: 26px. */
+  'ed-row': ['1.625rem', { lineHeight: '1.18', letterSpacing: '-0.015em' }],
+  /** Subtítulos del artículo y titulares del Radar: 28px. */
+  'ed-heading': ['1.75rem', { lineHeight: '1.2', letterSpacing: '-0.015em' }],
+  /** Citas destacadas: 32px. */
+  'ed-quote': [
+    'clamp(1.5rem, 1.1rem + 1.2vw, 2rem)',
+    { lineHeight: '1.22', letterSpacing: '-0.02em' },
+  ],
+  /** Titular de la nota destacada: 44px. */
+  'ed-featured': [
+    'clamp(1.875rem, 1.1rem + 2.4vw, 2.75rem)',
+    { lineHeight: '1.06', letterSpacing: '-0.025em' },
+  ],
+  /** "Una nota por semana. Sin ruido.": 48px. */
+  'ed-newsletter': [
+    'clamp(2rem, 1.25rem + 2.5vw, 3rem)',
+    { lineHeight: '1.04', letterSpacing: '-0.03em' },
+  ],
+  /** Titular de un artículo: 56px. */
+  'ed-title': [
+    'clamp(2.25rem, 1.25rem + 3vw, 3.5rem)',
+    { lineHeight: '1.02', letterSpacing: '-0.032em' },
+  ],
+  /** Titular de la portada del blog: 88px. */
+  'ed-display': [
+    'clamp(2.75rem, 1.2rem + 5.4vw, 5.5rem)',
+    { lineHeight: '0.98', letterSpacing: '-0.035em' },
+  ],
+} satisfies Record<string, FontSizeWithMetrics>;
+
 export const lineHeights = {
   tight: '1.05',
   snug: '1.15',
@@ -87,6 +156,8 @@ export const lineHeights = {
   body: '1.45',
   /** Bajadas de hero (Nosotras): 40px sobre 24px en el diseño. */
   loose: '1.65',
+  /** Interlineado base del blog: lo heredan los textos que no traen el suyo. */
+  reading: '1.6',
 } as const;
 
 export const letterSpacings = {
@@ -94,6 +165,8 @@ export const letterSpacings = {
   tight: '-0.01em',
   normal: '0',
   wide: '0.08em',
+  /** Rótulos en mayúsculas del blog ("BLOG · NOTAS DE OPERACIÓN", "ARCHIVO"). */
+  label: '0.14em',
 } as const;
 
 /**

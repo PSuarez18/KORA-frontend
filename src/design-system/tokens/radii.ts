@@ -1,5 +1,6 @@
 export const radii = {
   none: '0',
+  xs: '0.125rem', // 2 — blog
   sm: '0.25rem', // 4
   md: '0.75rem', // 12
   lg: '1rem', // 16 — cards de valor
@@ -21,6 +22,11 @@ export const semanticRadii = {
   avatar: radii.full,
   /** Cards grandes de Nosotras (proceso y fundadoras). */
   cardSoft: radii['4xl'],
+  /**
+   * Esquinas casi rectas del blog: etiquetas, imagen destacada, recuadros,
+   * botones e inputs. Es el registro "editorial" del diseño "Blog kora.".
+   */
+  sharp: radii.xs,
   /** Tile cuadrado del icono dentro de esas cards. */
   tile: '0.875rem', // 14
 } as const;

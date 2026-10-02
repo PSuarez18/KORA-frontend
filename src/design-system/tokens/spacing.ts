@@ -42,6 +42,12 @@ export const semanticSpacing = {
    */
   pageHeroTop: 'calc(2.75rem + clamp(1rem, 4.4vw, 4rem) + clamp(6rem, 1rem + 12vw, 13.2rem))',
   /**
+   * Padding superior de un artículo del blog. Más corto que `pageHeroTop`: el
+   * artículo arranca con un link de vuelta y un titular de lectura, no con un
+   * hero. En el diseño son 96px debajo del header.
+   */
+  articleTop: 'calc(2.75rem + clamp(1rem, 4.4vw, 4rem) + clamp(4rem, 2rem + 5vw, 7rem))',
+  /**
    * Aire al final de Nosotras, entre las cards de valores y el bloque de
    * contacto. En Figma son 493px (medido en el render de TIPO 3) — es un
    * remanso deliberado de la página, no un padding de sección; en la home el
@@ -72,6 +78,11 @@ export const containers = {
   default: '82.25rem', // 1316
   /** Bloques de texto que no deberían pasar de ~800px. */
   narrow: '50rem', // 800
+  /**
+   * Columna de lectura de un artículo del blog: 680 de texto, como en el
+   * diseño, + 2 × 48 de gutter (el padding va adentro del máximo, ver arriba).
+   */
+  article: '48.5rem', // 776
   /** Ancho del nav — igual al default para que el logo alinee con el contenido. */
   nav: '82.25rem',
   /** Ancho del bloque de contacto oscuro. */

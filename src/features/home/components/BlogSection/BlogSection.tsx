@@ -9,7 +9,7 @@ import { SectionHeading } from '@/components/molecules/SectionHeading';
 import { BlogCard } from '@/components/organisms/BlogCard';
 import { NewsletterPanel } from '@/components/organisms/NewsletterPanel';
 import { ROUTES_APP, SECTION_IDS } from '@/constants/routes.app';
-import { POST_META, POST_SLUGS } from '@/features/home/data/posts';
+import { getPreviewPosts } from '@/features/blog';
 import type { Dictionary, Locale } from '@/i18n';
 import { REVEAL_ITEM_CLASS, useScrollReveal } from '@/hooks/animations';
 
@@ -17,10 +17,21 @@ type BlogSectionProps = {
   locale: Locale;
   dict: Dictionary['blog'];
   newsletterDict: Dictionary['newsletter'];
+  postsDict: Dictionary['posts'];
+  categoriesDict: Dictionary['blogPage']['categories'];
 };
 
+/** Cuántas cards muestra la vista previa (las del diseño de la home). */
+const PREVIEW_COUNT = 3;
+
 /** Últimos artículos + panel de newsletter. */
-export function BlogSection({ locale, dict, newsletterDict }: BlogSectionProps) {
+export function BlogSection({
+  locale,
+  dict,
+  newsletterDict,
+  postsDict,
+  categoriesDict,
+}: BlogSectionProps) {
   const containerRef = useScrollReveal<HTMLDivElement>();
 
   return (
@@ -55,16 +66,17 @@ export function BlogSection({ locale, dict, newsletterDict }: BlogSectionProps) 
 
           {/* 29px entre cards. */}
           <ul className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-            {POST_SLUGS.map((slug) => (
-              <li key={slug} className={REVEAL_ITEM_CLASS}>
+            {/* El índice va en la key: mientras haya pocas notas, una puede repetirse. */}
+            {getPreviewPosts(PREVIEW_COUNT).map((post, index) => (
+              <li key={`${post.slug}-${index}`} className={REVEAL_ITEM_CLASS}>
                 <BlogCard
                   locale={locale}
-                  href={ROUTES_APP.blogPost(locale, slug)}
-                  cover={POST_META[slug].cover}
-                  publishedAt={POST_META[slug].publishedAt}
-                  category={dict.posts[slug].category}
-                  title={dict.posts[slug].title}
-                  excerpt={dict.posts[slug].excerpt}
+                  href={ROUTES_APP.blogPost(locale, post.slug)}
+                  cover={post.cover}
+                  publishedAt={post.publishedAt}
+                  category={categoriesDict[post.category]}
+                  title={postsDict[post.slug].title}
+                  excerpt={postsDict[post.slug].excerpt}
                   readMoreLabel={dict.readMore}
                 />
               </li>
